@@ -6,7 +6,7 @@ require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://blog:AJFpiLm2qaBey7UX@cluster0.hcvpx.mongodb.net/blog?retryWrites=true&w=majority";
+const uri = "mongodb+srv://blog:Z5NZxLbgpMkDUeG5@cluster0.hcvpx.mongodb.net/blog?retryWrites=true&w=majority";
 
 const app = express();
 
@@ -26,6 +26,7 @@ client.connect(err => {
     collection.find()
       .toArray((err, document) => {
         res.status(200).send(document);
+        console.log(document)
        
       })
   })
