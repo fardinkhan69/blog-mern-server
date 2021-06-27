@@ -6,7 +6,7 @@ require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://blog:Z5NZxLbgpMkDUeG5@cluster0.hcvpx.mongodb.net/blog?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hcvpx.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-  const collection = client.db("blog").collection("blogpost");
+  const collection = client.db(`${process.env.DB_NAME}`).collection("blogpost");
 
   app.get('/blogs', (req, res) => {
     collection.find()
